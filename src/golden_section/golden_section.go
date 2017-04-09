@@ -1,4 +1,4 @@
-package golden_ratio
+package golden_section
 
 import (
 	"math"
@@ -17,21 +17,21 @@ var (
 	x float64 = 0
 	y float64 = 0
 
-	iterations int = 1
-
 	x1 float64 = 0
 	x2 float64 = 0
 
 	y1 float64 = 0
 	y2 float64 = 0
+
+	iterations int = 1
 )
 
 func GoldenRatio(polynomial []float64) (float64, float64, int) {
 	iterations = 1
 	x1 = b - (b-a)*(1/alpha)
 	x2 = a + (b-a)*(1/alpha)
-	y1 = utils.CalculateFunction(polynomial, x1)
-	y2 = utils.CalculateFunction(polynomial, x2)
+	y1 = utils.CalcPolynomialFunction(polynomial, x1)
+	y2 = utils.CalcPolynomialFunction(polynomial, x2)
 	for math.Abs(b-a) > eps {
 		iterations++
 		if y1 < y2 {
@@ -39,13 +39,13 @@ func GoldenRatio(polynomial []float64) (float64, float64, int) {
 			x2 = x1
 			x1 = b - (b-a)*(1/alpha)
 			y2 = y1
-			y1 = utils.CalculateFunction(polynomial, x1)
+			y1 = utils.CalcPolynomialFunction(polynomial, x1)
 		} else {
 			a = x1
 			x1 = x2
 			x2 = a + (b-a)*(1/alpha)
 			y1 = y2
-			y2 = utils.CalculateFunction(polynomial, x2)
+			y2 = utils.CalcPolynomialFunction(polynomial, x2)
 		}
 	}
 	x = a

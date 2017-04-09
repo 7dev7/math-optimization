@@ -23,17 +23,17 @@ var (
 
 func Newton(polynomial []float64, derivative1 []float64, derivative2 []float64) (float64, float64, int) {
 	iterations = 1
-	y1 = utils.CalculateFunction(derivative1, x0)
-	y2 = utils.CalculateFunction(derivative2, x0)
+	y1 = utils.CalcPolynomialFunction(derivative1, x0)
+	y2 = utils.CalcPolynomialFunction(derivative2, x0)
 	x1 = x0 - y1/y2
 	for math.Abs(x1-x0) > eps {
 		iterations++
 		x0 = x1
-		y1 = utils.CalculateFunction(derivative1, x0)
-		y2 = utils.CalculateFunction(derivative2, x0)
+		y1 = utils.CalcPolynomialFunction(derivative1, x0)
+		y2 = utils.CalcPolynomialFunction(derivative2, x0)
 		x1 = x0 - y1/y2
 	}
 	x = x1
-	y = utils.CalculateFunction(polynomial, x)
+	y = utils.CalcPolynomialFunction(polynomial, x)
 	return x, y, iterations
 }
